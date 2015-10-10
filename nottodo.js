@@ -33,6 +33,59 @@ function updateItemStatus() {
 
 //ADDING ITEM TO THE LIST
 
+function constructNotText(itemText, totalItems) {
+	var notText;
+
+	switch ( totalItems) {
+        
+		case 7:
+		   notText = "Don't " + itemText;
+		   break;
+
+		case 6:
+		   notText = "Never again " + itemText;
+		   break;
+
+		case 11:
+		   notText = "Please don't " + itemText;
+		   break;
+
+		case 10:
+		   notText = "Make your goal not to " + itemText;
+		   break;
+
+		case 1:
+		   notText = "Don't you dare " + itemText;
+		   break;
+		
+		case 2:
+		   notText = "Make sure you don't " + itemText;
+		   break;
+
+		case 3:
+		   notText = "How about you don't " + itemText + " ever again";
+		   break;
+
+		case 4:
+		   notText = itemText + " is for loosers";
+		   break;
+		
+		case 5:
+		   notText = "Don't even think about planing to " + itemText;
+		   break;
+
+		case 8:
+		   notText = ("Don't " + itemText + "!!!!").toUpperCase();
+
+		   break;
+
+		default:
+		   notText = "Don't " + itemText;
+	}
+	return notText;
+
+}
+
 function addNewItem(list, itemText) {
 
 	totalItems++;
@@ -53,65 +106,12 @@ function addNewItem(list, itemText) {
     //////When the checkbox is unchecked change the lines"
      
 
-
-
-
 	//replace MYSELF to YOURSELF
-     
-
-
-
-	
+    
 
 	totalItems = (totalItems % 11) + 1;
 
-    switch ( totalItems) {
-        
-
-		case 7:
-		   span.innerText = "Don't " + itemText;
-		   break;
-
-		case 6:
-		   span.innerText = "Never again " + itemText;
-		   break;
-
-		case 11:
-		   span.innerText = "Please don't " + itemText;
-		   break;
-
-		case 10:
-		   span.innerText = "Make your goal not to " + itemText;
-		   break;
-
-		case 1:
-		   span.innerText = "Don't you dare " + itemText;
-		   break;
-		
-		case 2:
-		   span.innerText = "Make sure you don't " + itemText;
-		   break;
-
-		case 3:
-		   span.innerText = "How about you don't " + itemText + " ever again";
-		   break;
-
-		case 4:
-		   span.innerText = itemText + " is for loosers";
-		   break;
-		
-		case 5:
-		   span.innerText = "Don't even think about planing to " + itemText;
-		   break;
-
-		case 8:
-		   span.innerText = ("Don't " + itemText + "!!!!").toUpperCase();
-
-		   break;
-
-		default:
-		   span.innerText = "Don't " + itemText;
-	}
+	span.innerText = constructNotText(itemText, totalItems);
 
 
 	checkBox.onclick = function() {
@@ -124,6 +124,10 @@ function addNewItem(list, itemText) {
 	list.appendChild(listItem);
 
 }
+
+
+
+
 
 var totalItems = 0;
 
