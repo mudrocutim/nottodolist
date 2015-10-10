@@ -127,24 +127,24 @@ function addNewItem(list, itemText) {
 
 //Writing the item txt
 
-var inItemText = document.getElementById("inItemText");
-	inItemText.focus();
+var newItemBox = document.getElementById("newItemBox");
+	newItemBox.focus();
 
 
-inItemText.onkeyup = function(e) {
+newItemBox.onkeyup = function(e) {
 
 	//ENTER KEY for submit
 	if (e.which == 13 ) { 
 
-	    var itemText = inItemText.value
+	    var itemText = newItemBox.value
 		if (!itemText || itemText == "") {
 			return false;
 		}
 
 		addNewItem(document.getElementById('nottodo'), itemText);
 
-		inItemText.focus();
-		inItemText.select();
+		newItemBox.focus();
+		newItemBox.select();
 
 
     }
