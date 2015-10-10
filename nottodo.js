@@ -109,8 +109,6 @@ function addNewItem(list, itemText) {
 	//replace MYSELF to YOURSELF
     
 
-	totalItems = totalItems + 1;
-
 	span.innerText = constructNotText(itemText, totalItems);
 
 
