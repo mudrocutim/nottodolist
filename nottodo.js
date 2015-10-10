@@ -36,7 +36,7 @@ function updateItemStatus() {
 function constructNotText(itemText, totalItems) {
 	var notText;
 
-	switch ( totalItems) {
+	switch (totalItems % 11) {
         
 		case 7:
 		   notText = "Don't " + itemText;
@@ -46,7 +46,7 @@ function constructNotText(itemText, totalItems) {
 		   notText = "Never again " + itemText;
 		   break;
 
-		case 11:
+		case 0:
 		   notText = "Please don't " + itemText;
 		   break;
 
@@ -109,7 +109,7 @@ function addNewItem(list, itemText) {
 	//replace MYSELF to YOURSELF
     
 
-	totalItems = (totalItems % 11) + 1;
+	totalItems = totalItems + 1;
 
 	span.innerText = constructNotText(itemText, totalItems);
 
