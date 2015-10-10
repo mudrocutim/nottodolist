@@ -2,6 +2,7 @@
 // -avoid global variables
 // - make functions reusable
 
+var items = [];
 
 
 function updateItemStatus() {
@@ -88,28 +89,25 @@ function constructNotText(itemText, totalItems) {
 
 function addNewItem(list, itemText) {
 
-	totalItems++;
+	items.push(itemText);
 
 	var listItem = document.createElement("li");
 	
 	var checkBox = document.createElement("input")
 	checkBox.checked = true
 	checkBox.type = "checkbox";
-	checkBox.id = "cb_" + totalItems;
+	checkBox.id = "cb_" + items.length;
 	// checkBox.onclick = updateItemStatus;
 
 	var span = document.createElement("span");
-	span.id = "item_" + totalItems;
+	span.id = "item_" + items.length;
 	span.className = "checked";
  
-
-    //////When the checkbox is unchecked change the lines"
      
-
-	//replace MYSELF to YOURSELF
+    //replace MYSELF to YOURSELF
     
 
-	span.innerText = constructNotText(itemText, totalItems);
+	span.innerText = constructNotText(itemText, items.length);
 
 
 	checkBox.onclick = function() {
@@ -127,16 +125,13 @@ function addNewItem(list, itemText) {
 
 
 
-var totalItems = 0;
-
 //Writing the item txt
 
 var inItemText = document.getElementById("inItemText");
 	inItemText.focus();
 
-inItemText.onkeyup = function(e) {
 
-		// var itemText = e.which;
+inItemText.onkeyup = function(e) {
 
 	//ENTER KEY for submit
 	if (e.which == 13 ) { 
