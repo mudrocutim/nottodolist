@@ -3,6 +3,36 @@
 // - make functions reusable
 
 var items = [];
+var view = new Object();
+
+
+view.newListEntry = function(text, index) {
+	
+	var checkBox = document.createElement("input")
+	checkBox.checked = true
+	checkBox.type = "checkbox";
+	checkBox.id = "cb_" + index;
+	// checkBox.onclick = updateItemStatus;
+
+	var span = document.createElement("span");
+	span.id = "item_" + index;
+	span.className = "checked";
+
+	span.innerText = constructNotText(text, index);
+
+	checkBox.onclick = function() {
+		span.className = (span.className == "checked" ? "": "checked");
+	}
+
+	var listItem = document.createElement("li");
+	
+	listItem.appendChild(checkBox);
+	listItem.appendChild(span);
+
+	return listItem;
+}
+
+
 
 
 function updateItemStatus() {
@@ -91,31 +121,7 @@ function addNewItem(list, itemText) {
 
 	items.push(itemText);
 
-	var listItem = document.createElement("li");
-	
-	var checkBox = document.createElement("input")
-	checkBox.checked = true
-	checkBox.type = "checkbox";
-	checkBox.id = "cb_" + items.length;
-	// checkBox.onclick = updateItemStatus;
-
-	var span = document.createElement("span");
-	span.id = "item_" + items.length;
-	span.className = "checked";
- 
-     
-    //replace MYSELF to YOURSELF
-    
-
-	span.innerText = constructNotText(itemText, items.length);
-
-
-	checkBox.onclick = function() {
-		span.className = (span.className == "checked" ? "": "checked");
-	}
-
-	listItem.appendChild(checkBox);
-	listItem.appendChild(span);
+	listItem = view.newListEntry(itemText, items.length)
 
 	list.appendChild(listItem);
 
