@@ -2,6 +2,37 @@
 // -avoid global variables
 // - make functions reusable
 
+var items = [];
+var view = new Object();
+
+
+view.newListEntry = function(text, index) {
+	
+	var checkBox = document.createElement("input")
+	checkBox.checked = true
+	checkBox.type = "checkbox";
+	checkBox.id = "cb_" + index;
+	// checkBox.onclick = updateItemStatus;
+
+	var span = document.createElement("span");
+	span.id = "item_" + index;
+	span.className = "checked";
+
+	span.innerText = constructNotText(text, index);
+
+	checkBox.onclick = function() {
+		span.className = (span.className == "checked" ? "": "checked");
+	}
+
+	var listItem = document.createElement("li");
+	
+	listItem.appendChild(checkBox);
+	listItem.appendChild(span);
+
+	return listItem;
+}
+
+
 
 
 function updateItemStatus() {
@@ -33,121 +64,93 @@ function updateItemStatus() {
 
 //ADDING ITEM TO THE LIST
 
-function addNewItem(list, itemText) {
+function constructNotText(itemText, totalItems) {
+	var notText;
 
-	totalItems++;
-
-	var listItem = document.createElement("li");
-	
-	var checkBox = document.createElement("input")
-	checkBox.checked = true
-	checkBox.type = "checkbox";
-	checkBox.id = "cb_" + totalItems;
-	// checkBox.onclick = updateItemStatus;
-
-	var span = document.createElement("span");
-	span.id = "item_" + totalItems;
-	span.className = "checked";
- 
-
-    //////When the checkbox is unchecked change the lines"
-     
-
-
-
-
-	//replace MYSELF to YOURSELF
-     
-
-
-
-	
-
-	totalItems = (totalItems % 11) + 1;
-
-    switch ( totalItems) {
+	switch (totalItems % 11) {
         
-
 		case 7:
-		   span.innerText = "Don't " + itemText;
+		   notText = "Don't " + itemText;
 		   break;
 
 		case 6:
-		   span.innerText = "Never again " + itemText;
+		   notText = "Never again " + itemText;
 		   break;
 
-		case 11:
-		   span.innerText = "Please don't " + itemText;
+		case 0:
+		   notText = "Please don't " + itemText;
 		   break;
 
 		case 10:
-		   span.innerText = "Make your goal not to " + itemText;
+		   notText = "Make your goal not to " + itemText;
 		   break;
 
 		case 1:
-		   span.innerText = "Don't you dare " + itemText;
+		   notText = "Don't you dare " + itemText;
 		   break;
 		
 		case 2:
-		   span.innerText = "Make sure you don't " + itemText;
+		   notText = "Make sure you don't " + itemText;
 		   break;
 
 		case 3:
-		   span.innerText = "How about you don't " + itemText + " ever again";
+		   notText = "How about you don't " + itemText + " ever again";
 		   break;
 
 		case 4:
-		   span.innerText = itemText + " is for loosers";
+		   notText = itemText + " is for loosers";
 		   break;
 		
 		case 5:
-		   span.innerText = "Don't even think about planing to " + itemText;
+		   notText = "Don't even think about planing to " + itemText;
 		   break;
 
 		case 8:
-		   span.innerText = ("Don't " + itemText + "!!!!").toUpperCase();
+		   notText = ("Don't " + itemText + "!!!!").toUpperCase();
 
 		   break;
 
 		default:
-		   span.innerText = "Don't " + itemText;
+		   notText = "Don't " + itemText;
 	}
+	return notText;
 
+}
 
-	checkBox.onclick = function() {
-		span.className = (span.className == "checked" ? "": "checked");
-	}
+function addNewItem(list, itemText) {
 
-	listItem.appendChild(checkBox);
-	listItem.appendChild(span);
+	items.push(itemText);
+
+	listItem = view.newListEntry(itemText, items.length)
 
 	list.appendChild(listItem);
 
 }
 
-var totalItems = 0;
+
+
+
 
 //Writing the item txt
 
-var inItemText = document.getElementById("inItemText");
-	inItemText.focus();
+var newItemBox = document.getElementById("newItemBox");
+	newItemBox.focus();
 
-inItemText.onkeyup = function(e) {
 
-		// var itemText = e.which;
+newItemBox.onkeyup = function(e) {
 
 	//ENTER KEY for submit
 	if (e.which == 13 ) { 
 
-	    var itemText = inItemText.value
+	    var itemText = newItemBox.value
 		if (!itemText || itemText == "") {
 			return false;
 		}
 
 		addNewItem(document.getElementById('nottodo'), itemText);
 
-		inItemText.focus();
-		inItemText.select();
+		newItemBox.focus();
+		newItemBox.select();
 
 
     }
